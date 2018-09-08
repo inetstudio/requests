@@ -34,6 +34,11 @@ class MessagesController extends Controller implements MessagesControllerContrac
 
             $message = app()->make('InetStudio\Requests\Messages\Contracts\Services\Front\MessagesServiceContract')
                 ->save($request, 0);
+
+            if ($request->has('subscribe-agree')) {
+                $subscriptionService = app()->make('InetStudio\Subscription\Contracts\Services\Front\SubscriptionServiceContract');
+                $subscriptionService->subscribeByRequest($request);
+            }
         }
 
         return app()->makeWith(SendMessageResponseContract::class, [

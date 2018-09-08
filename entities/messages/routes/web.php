@@ -10,4 +10,9 @@ Route::group([
     Route::resource('messages', 'MessagesControllerContract', ['as' => 'back.requests']);
 });
 
-
+Route::group([
+    'namespace' => 'InetStudio\Requests\Messages\Contracts\Http\Controllers\Front',
+    'middleware' => ['web'],
+], function () {
+    Route::post('requests/messages/send', 'MessagesControllerContract@sendMessage')->name('front.requests.messages.send');
+});
