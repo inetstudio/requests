@@ -72,4 +72,14 @@ class MessagesServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'admin.module.requests.messages');
     }
+
+    /**
+     * Регистрация переводов.
+     *
+     * @return void
+     */
+    protected function registerTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'admin.module.requests.messages');
+    }
 }

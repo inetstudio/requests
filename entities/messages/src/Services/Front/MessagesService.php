@@ -2,6 +2,7 @@
 
 namespace InetStudio\Requests\Messages\Services\Front;
 
+use InetStudio\Requests\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Requests\Messages\Contracts\Services\Front\MessagesServiceContract;
 
 /**
@@ -57,5 +58,20 @@ class MessagesService implements MessagesServiceContract
     public function getAllMessages(array $params = [])
     {
         return $this->repository->getAllItems($params);
+    }
+
+    /**
+     * Сохраняем модель.
+     *
+     * @param $request
+     * @param int $id
+     *
+     * @return MessageModelContract
+     */
+    public function save($request, int $id): MessageModelContract
+    {
+        $item = $this->repository->save($request->only($this->repository->getModel()->getFillable()), $id);
+
+        return $item;
     }
 }
