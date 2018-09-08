@@ -83,4 +83,17 @@ class FormModel extends Model implements FormModelContract
     {
         return self::ENTITY_TYPE;
     }
+
+    /**
+     * Отношение "один ко многим" с моделью сообщений.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(
+            app()->make('InetStudio\Requests\Messages\Contracts\Models\MessageModelContract'),
+            'form_id', 'id'
+        );
+    }
 }
