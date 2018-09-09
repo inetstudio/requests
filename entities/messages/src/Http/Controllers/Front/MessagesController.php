@@ -28,7 +28,7 @@ class MessagesController extends Controller implements MessagesControllerContrac
             ->getFormById($request->get('form_id'));
 
         if ($form) {
-            $formRequest = app()->make('InetStudio\Requests\Messages\Contracts\Http\Requests\Front'.ucfirst($form->alias).'RequestContract');
+            $formRequest = app()->make('InetStudio\Requests\Messages\Contracts\Http\Requests\Front\\'.ucfirst($form->alias).'RequestContract');
 
             Validator::make($request->all(), $formRequest->rules(), $formRequest->messages())->validate();
 
