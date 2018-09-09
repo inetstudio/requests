@@ -70,7 +70,7 @@ class MessageModel extends Model implements MessageModelContract
      */
     public function setAdditionalInfoAttribute($value)
     {
-        $this->attributes['additional_info'] = (array) $value;
+        $this->attributes['additional_info'] = json_encode((array) $value);
     }
 
     /**
