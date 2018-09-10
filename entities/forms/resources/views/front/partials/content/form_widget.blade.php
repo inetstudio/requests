@@ -6,7 +6,6 @@
 
 @includeWhen(
     $form && ($form->messages_limit > 0 && $form->messages_limit > $form->messages->count() || $form->messages_limit == 0),
-    'admin.module.requests.forms::front.partials.content.forms.'.$form->alias, [
-        'form_id' => $id,
-    ]
+    'admin.module.requests.forms::front.partials.content.forms.'.$form->alias,
+    compact('form')
 )
