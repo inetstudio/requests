@@ -20,6 +20,7 @@ class MessagesServiceProvider extends ServiceProvider
         $this->registerPublishes();
         $this->registerRoutes();
         $this->registerViews();
+        $this->registerTranslations();
     }
 
     /**
