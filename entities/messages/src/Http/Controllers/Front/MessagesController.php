@@ -27,7 +27,7 @@ class MessagesController extends Controller implements MessagesControllerContrac
         $form = app()->make('InetStudio\Requests\Forms\Contracts\Services\Front\FormsServiceContract')
             ->getFormById($request->get('form_id'));
 
-        if ($form) {
+        if ($form && ($form->messages_limit > 0 && $form->messages_limit > $form->messages->count() || $form->messages_limit == 0)) {
             $formRequest = app()->make('InetStudio\Requests\Messages\Contracts\Http\Requests\Front\\'.ucfirst($form->alias).'RequestContract');
 
             Validator::make($request->all(), $formRequest->rules(), $formRequest->messages())->validate();
