@@ -47,6 +47,7 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
                     'id' => $item->id,
                     'type' => $modelClass,
                     'title' => $item->title,
+                    'alias' => $item->alias,
                 ],
             ];
         } else {

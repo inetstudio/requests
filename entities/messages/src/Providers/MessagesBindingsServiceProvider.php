@@ -10,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 class MessagesBindingsServiceProvider extends ServiceProvider
 {
     /**
-    * @var  bool
+    * @var bool
     */
     protected $defer = true;
 
@@ -19,8 +19,10 @@ class MessagesBindingsServiceProvider extends ServiceProvider
     */
     public $bindings = [
         'InetStudio\Requests\Messages\Contracts\Events\Back\ModifyMessageEventContract' => 'InetStudio\Requests\Messages\Events\Back\ModifyMessageEvent',
+        'InetStudio\Requests\Messages\Contracts\Exports\MessagesExportContract' => 'InetStudio\Requests\Messages\Exports\MessagesExport',
         'InetStudio\Requests\Messages\Contracts\Http\Controllers\Back\MessagesControllerContract' => 'InetStudio\Requests\Messages\Http\Controllers\Back\MessagesController',
         'InetStudio\Requests\Messages\Contracts\Http\Controllers\Back\MessagesDataControllerContract' => 'InetStudio\Requests\Messages\Http\Controllers\Back\MessagesDataController',
+        'InetStudio\Requests\Messages\Contracts\Http\Controllers\Back\MessagesExportControllerContract' => 'InetStudio\Requests\Messages\Http\Controllers\Back\MessagesExportController',
         'InetStudio\Requests\Messages\Contracts\Http\Controllers\Front\MessagesControllerContract' => 'InetStudio\Requests\Messages\Http\Controllers\Front\MessagesController',
         'InetStudio\Requests\Messages\Contracts\Http\Responses\Back\Messages\DestroyResponseContract' => 'InetStudio\Requests\Messages\Http\Responses\Back\Messages\DestroyResponse',
         'InetStudio\Requests\Messages\Contracts\Http\Responses\Back\Messages\FormResponseContract' => 'InetStudio\Requests\Messages\Http\Responses\Back\Messages\FormResponse',
@@ -38,7 +40,7 @@ class MessagesBindingsServiceProvider extends ServiceProvider
     /**
      * Получить сервисы от провайдера.
      *
-     * @return  array
+     * @return array
      */
     public function provides()
     {
