@@ -19,6 +19,7 @@ class MessagesBindingsServiceProvider extends ServiceProvider
     */
     public $bindings = [
         'InetStudio\Requests\Messages\Contracts\Events\Back\ModifyMessageEventContract' => 'InetStudio\Requests\Messages\Events\Back\ModifyMessageEvent',
+        'InetStudio\Requests\Messages\Contracts\Events\Front\SendMessageEventContract' => 'InetStudio\Requests\Messages\Events\Front\SendMessageEvent',
         'InetStudio\Requests\Messages\Contracts\Exports\MessagesExportContract' => 'InetStudio\Requests\Messages\Exports\MessagesExport',
         'InetStudio\Requests\Messages\Contracts\Http\Controllers\Back\MessagesControllerContract' => 'InetStudio\Requests\Messages\Http\Controllers\Back\MessagesController',
         'InetStudio\Requests\Messages\Contracts\Http\Controllers\Back\MessagesDataControllerContract' => 'InetStudio\Requests\Messages\Http\Controllers\Back\MessagesDataController',

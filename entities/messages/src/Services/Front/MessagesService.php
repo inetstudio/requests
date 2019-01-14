@@ -72,6 +72,10 @@ class MessagesService implements MessagesServiceContract
     {
         $item = $this->repository->save($request->only($this->repository->getModel()->getFillable()), $id);
 
+        event(app()->makeWith('InetStudio\Requests\Messages\Contracts\Events\Front\SendMessageEventContract', [
+            'object' => $item,
+        ]));
+
         return $item;
     }
 }
