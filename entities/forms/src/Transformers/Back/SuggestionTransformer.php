@@ -15,7 +15,7 @@ class SuggestionTransformer extends TransformerAbstract implements SuggestionTra
     /**
      * @var
      */
-    private $type;
+    protected $type;
 
     /**
      * SuggestionTransformer constructor.

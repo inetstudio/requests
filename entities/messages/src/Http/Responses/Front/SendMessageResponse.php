@@ -14,7 +14,7 @@ class SendMessageResponse implements SendMessageResponseContract, Responsable
     /**
      * @var
      */
-    private $item;
+    protected $item;
 
     /**
      * SendMessageResponse constructor.

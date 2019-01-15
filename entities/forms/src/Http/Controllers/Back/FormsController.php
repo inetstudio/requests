@@ -125,7 +125,7 @@ class FormsController extends Controller implements FormsControllerContract
      *
      * @return SaveResponseContract
      */
-    private function save(SaveFormRequestContract $request, int $id = 0): SaveResponseContract
+    protected function save(SaveFormRequestContract $request, int $id = 0): SaveResponseContract
     {
         $item = $this->services['forms']->save($request, $id);
 
