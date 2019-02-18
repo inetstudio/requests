@@ -81,7 +81,7 @@ class MessagesExport implements MessagesExportContract, FromQuery, WithMapping, 
 
         $data = [];
         if ($randomMessage) {
-            $data = array_values($randomMessage->additional_info);
+            $data = array_keys($randomMessage->additional_info);
             array_unshift($data, 'Время заявки');
         }
 
