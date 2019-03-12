@@ -64,6 +64,12 @@ class MessagesExport implements MessagesExportContract, FromQuery, WithMapping, 
         $data = array_values($message->additional_info);
         array_unshift($data, Date::dateTimeToExcel($message->created_at));
 
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = implode(',', $value);
+            }
+        }
+
         return $data;
     }
 
