@@ -42,7 +42,12 @@ class FormModel extends Model implements FormModelContract
         'deleted_at',
     ];
 
-    protected $revisionCreationsEnabled = true;
+    /**
+     * Should the timestamps be audited?
+     *
+     * @var bool
+     */
+    protected $auditTimestamps = true;
 
     /**
      * Сеттер атрибута title.

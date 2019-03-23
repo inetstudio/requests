@@ -30,6 +30,8 @@ class MessagesExport implements MessagesExportContract, FromQuery, WithMapping, 
      */
     protected $messagesRepository;
 
+    protected $headings;
+
     /**
      * MessagesExport constructor.
      *
@@ -39,6 +41,22 @@ class MessagesExport implements MessagesExportContract, FromQuery, WithMapping, 
     {
         $this->form = $form;
         $this->messagesRepository = app()->make('InetStudio\Requests\Messages\Contracts\Repositories\MessagesRepositoryContract');
+
+        $randomMessage = $this->messagesRepository->getItemsQuery([
+            'relations' => ['form'],
+            'random' => true,
+        ])->whereHas('form', function ($query) use ($form) {
+            $query->where('alias', '=', $form);
+        })->first();
+
+        $headings = [];
+        if ($randomMessage) {
+            $headings = array_keys($randomMessage->additional_info);
+
+            array_unshift($headings, 'Время заявки');
+        }
+
+        $this->headings = $headings;
     }
 
     /**
@@ -61,14 +79,25 @@ class MessagesExport implements MessagesExportContract, FromQuery, WithMapping, 
      */
     public function map($message): array
     {
-        $data = array_values($message->additional_info);
-        array_unshift($data, Date::dateTimeToExcel($message->created_at));
+        $messageData = $message->additional_info;
 
-        foreach ($data as $key => $value) {
+        $data = [];
+
+        $data[] = Date::dateTimeToExcel($message->created_at);
+
+        $keys = $this->headings;
+        array_shift($keys);
+
+        foreach ($keys as $key) {
+            $value = $messageData[$key] ?? '';
+
             if (is_array($value)) {
-                $data[$key] = implode(',', $value);
+                $value = implode(',', $value);
             }
+
+            $data[] = $value;
         }
+
 
         return $data;
     }
@@ -78,20 +107,7 @@ class MessagesExport implements MessagesExportContract, FromQuery, WithMapping, 
      */
     public function headings(): array
     {
-        $randomMessage = $this->messagesRepository->getItemsQuery([
-            'relations' => ['form'],
-            'random' => true,
-        ])->whereHas('form', function ($query) {
-            $query->where('alias', '=', $this->form);
-        })->first();
-
-        $data = [];
-        if ($randomMessage) {
-            $data = array_keys($randomMessage->additional_info);
-            array_unshift($data, 'Время заявки');
-        }
-
-        return $data;
+        return $this->headings;
     }
 
     /**

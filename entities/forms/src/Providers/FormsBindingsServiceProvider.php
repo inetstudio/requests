@@ -3,17 +3,13 @@
 namespace InetStudio\Requests\Forms\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class FormsBindingsServiceProvider.
  */
-class FormsBindingsServiceProvider extends ServiceProvider
+class FormsBindingsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-    * @var  bool
-    */
-    protected $defer = true;
-
     /**
     * @var  array
     */
