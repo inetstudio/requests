@@ -110,7 +110,7 @@ class MessagesDataTableService extends DataTable implements MessagesDataTableSer
 
         return [
             'order' => [
-                2,
+                1,
                 'desc'
             ],
             'paging' => true,
