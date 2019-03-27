@@ -18,7 +18,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <div class="ibox-tools">
-                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#export_messages_modal">Экспорт</button>
+                            <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#export_messages_modal">Экспорт</button>
                         </div>
                     </div>
                     <div class="ibox-content">

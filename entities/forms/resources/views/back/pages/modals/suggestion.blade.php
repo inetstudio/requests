@@ -9,26 +9,24 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="ibox-content form-horizontal">
-                        <div class="row">
+                    <div class="ibox-content">
 
-                            {!! Form::hidden('requests_form_data', '', [
-                                'class' => 'choose-data',
-                                'id' => 'requests_form_data',
-                            ]) !!}
+                        {!! Form::hidden('requests_form_data', '', [
+                            'class' => 'choose-data',
+                            'id' => 'requests_form_data',
+                        ]) !!}
 
-                            {!! Form::string('requests_form', '', [
-                                'label' => [
-                                    'title' => 'Формы',
-                                ],
-                                'field' => [
-                                    'class' => 'form-control autocomplete',
-                                    'data-search' => route('back.requests.forms.getSuggestions'),
-                                    'data-target' => '#requests_form_data'
-                                ],
-                            ]) !!}
+                        {!! Form::string('requests_form', '', [
+                            'label' => [
+                                'title' => 'Формы',
+                            ],
+                            'field' => [
+                                'class' => 'form-control autocomplete',
+                                'data-search' => route('back.requests.forms.getSuggestions'),
+                                'data-target' => '#requests_form_data'
+                            ],
+                        ]) !!}
 
-                        </div>
                     </div>
                 </div>
 

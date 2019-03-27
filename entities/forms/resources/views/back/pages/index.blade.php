@@ -17,7 +17,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins requests-forms-package">
                     <div class="ibox-title">
-                        <a href="{{ route('back.requests.forms.create') }}" class="btn btn-sm btn-primary">Добавить</a>
+                        <a href="{{ route('back.requests.forms.create') }}" class="btn btn-xs btn-primary">Добавить</a>
                     </div>
                     <div class="ibox-content">
                         <div class="table-responsive">
