@@ -4,6 +4,7 @@ namespace InetStudio\Requests\Messages\Http\Responses\Front;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
+use InetStudio\Requests\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Requests\Messages\Contracts\Http\Responses\Front\SendItemResponseContract;
 
 /**
@@ -12,7 +13,7 @@ use InetStudio\Requests\Messages\Contracts\Http\Responses\Front\SendItemResponse
 class SendItemResponse implements SendItemResponseContract, Responsable
 {
     /**
-     * @var
+     * @var MessageModelContract|null
      */
     protected $item;
 
