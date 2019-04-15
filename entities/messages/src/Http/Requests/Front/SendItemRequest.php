@@ -60,7 +60,7 @@ class SendItemRequest extends FormRequest implements SendItemRequestContract
     }
 
     /**
-     * Инициализация нужного form request'а
+     * Инициализация нужного form request'а.
      *
      * @throws BindingResolutionException
      */
