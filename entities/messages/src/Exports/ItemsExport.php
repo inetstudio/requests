@@ -118,7 +118,6 @@ class ItemsExport implements ItemsExportContract, FromQuery, WithMapping, WithHe
             $data[] = $value;
         }
 
-
         return $data;
     }
 

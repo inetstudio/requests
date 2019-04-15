@@ -32,7 +32,7 @@ interface ResourceControllerContract
      * @return ShowResponseContract
      */
     public function show(ItemsServiceContract $resourceService, int $id = 0): ShowResponseContract;
-    
+
     /**
      * Редактирование объекта.
      *
