@@ -25,60 +25,61 @@
 
         {!! Form::open(['url' => (! $item->id) ? route('back.requests.forms.store') : route('back.requests.forms.update', [$item->id]), 'id' => 'mainForm', 'enctype' => 'multipart/form-data']) !!}
 
-            @if ($item->id)
-                {{ method_field('PUT') }}
-            @endif
+        @if ($item->id)
+            {{ method_field('PUT') }}
+        @endif
 
-            {!! Form::hidden('form_id', (! $item->id) ? '' : $item->id, ['id' => 'object-id']) !!}
+        {!! Form::hidden('form_id', (! $item->id) ? '' : $item->id, ['id' => 'object-id']) !!}
 
-            {!! Form::hidden('form_type', get_class($item), ['id' => 'object-type']) !!}
+        {!! Form::hidden('form_type', get_class($item), ['id' => 'object-type']) !!}
 
-            <div class="ibox">
-                <div class="ibox-title">
-                    {!! Form::buttons('', '', ['back' => 'back.requests.forms.index']) !!}
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel-group float-e-margins" id="mainAccordion">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h5 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#mainAccordion" href="#collapseMain" aria-expanded="true">Основная информация</a>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseMain" class="collapse show" aria-expanded="true">
-                                        <div class="panel-body">
+        <div class="ibox">
+            <div class="ibox-title">
+                {!! Form::buttons('', '', ['back' => 'back.requests.forms.index']) !!}
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel-group float-e-margins" id="mainAccordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#mainAccordion" href="#collapseMain"
+                                           aria-expanded="true">Основная информация</a>
+                                    </h5>
+                                </div>
+                                <div id="collapseMain" class="collapse show" aria-expanded="true">
+                                    <div class="panel-body">
 
-                                            {!! Form::string('title', $item->title, [
-                                                'label' => [
-                                                    'title' => 'Заголовок',
-                                                ],
-                                            ]) !!}
+                                        {!! Form::string('title', $item->title, [
+                                            'label' => [
+                                                'title' => 'Заголовок',
+                                            ],
+                                        ]) !!}
 
-                                            {!! Form::string('alias', $item->alias, [
-                                                'label' => [
-                                                    'title' => 'Алиас',
-                                                ],
-                                            ]) !!}
+                                        {!! Form::string('alias', $item->alias, [
+                                            'label' => [
+                                                'title' => 'Алиас',
+                                            ],
+                                        ]) !!}
 
-                                            {!! Form::string('messages_limit', $item->messages_limit, [
-                                                'label' => [
-                                                    'title' => 'Лимит сообщений',
-                                                ],
-                                            ]) !!}
+                                        {!! Form::string('messages_limit', $item->messages_limit, [
+                                            'label' => [
+                                                'title' => 'Лимит сообщений',
+                                            ],
+                                        ]) !!}
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="ibox-footer">
-                    {!! Form::buttons('', '', ['back' => 'back.requests.forms.index']) !!}
-                </div>
             </div>
+            <div class="ibox-footer">
+                {!! Form::buttons('', '', ['back' => 'back.requests.forms.index']) !!}
+            </div>
+        </div>
 
         {!! Form::close()!!}
 

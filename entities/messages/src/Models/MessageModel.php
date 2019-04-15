@@ -4,8 +4,11 @@ namespace InetStudio\Requests\Messages\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use InetStudio\AdminPanel\Models\Traits\HasJSONColumns;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Requests\Messages\Contracts\Models\MessageModelContract;
+use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
 /**
  * Class MessageModel.
@@ -14,6 +17,7 @@ class MessageModel extends Model implements MessageModelContract
 {
     use SoftDeletes;
     use HasJSONColumns;
+    use BuildQueryScopeTrait;
 
     const ENTITY_TYPE = 'requests_message';
 
@@ -30,7 +34,8 @@ class MessageModel extends Model implements MessageModelContract
      * @var array
      */
     protected $fillable = [
-        'form_id', 'additional_info',
+        'form_id',
+        'additional_info',
     ];
 
     /**
@@ -54,11 +59,31 @@ class MessageModel extends Model implements MessageModelContract
     ];
 
     /**
+     * Загрузка модели.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::$buildQueryScopeDefaults['columns'] = [
+            'id',
+            'form_id',
+            'additional_info',
+        ];
+
+        self::$buildQueryScopeDefaults['relations'] = [
+            'form' => function (HasOne $formQuery) {
+                $formQuery->select(['id', 'title', 'alias', 'messages_limit']);
+            },
+        ];
+    }
+
+    /**
      * Сеттер атрибута form_id.
      *
      * @param $value
      */
-    public function setFormIdAttribute($value)
+    public function setFormIdAttribute($value): void
     {
         $this->attributes['form_id'] = (int) $value;
     }
@@ -68,7 +93,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @param $value
      */
-    public function setAdditionalInfoAttribute($value)
+    public function setAdditionalInfoAttribute($value): void
     {
         $this->attributes['additional_info'] = json_encode((array) $value);
     }
@@ -78,7 +103,7 @@ class MessageModel extends Model implements MessageModelContract
      *
      * @return string
      */
-    public function getTypeAttribute()
+    public function getTypeAttribute(): string
     {
         return self::ENTITY_TYPE;
     }
@@ -86,12 +111,16 @@ class MessageModel extends Model implements MessageModelContract
     /**
      * Обратное отношение "один ко многим" с моделью формы.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
+     *
+     * @throws BindingResolutionException
      */
-    public function form()
+    public function form(): HasOne
     {
+        $formModel = app()->make('InetStudio\Requests\Forms\Contracts\Models\FormModelContract');
+
         return $this->hasOne(
-            app()->make('InetStudio\Requests\Forms\Contracts\Models\FormModelContract'),
+            get_class($formModel),
             'id',
             'form_id'
         );

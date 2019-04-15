@@ -2,7 +2,7 @@
 
 namespace InetStudio\Requests\Forms\Console\Commands;
 
-use InetStudio\AdminPanel\Console\Commands\BaseSetupCommand;
+use InetStudio\AdminPanel\Base\Console\Commands\BaseSetupCommand;
 
 /**
  * Class SetupCommand.
@@ -25,8 +25,6 @@ class SetupCommand extends BaseSetupCommand
 
     /**
      * Инициализация команд.
-     *
-     * @return void
      */
     protected function initCommands(): void
     {
@@ -36,7 +34,7 @@ class SetupCommand extends BaseSetupCommand
                 'description' => 'Publish migrations',
                 'command' => 'vendor:publish',
                 'params' => [
-                    '--provider' => 'InetStudio\Requests\Forms\Providers\FormsServiceProvider',
+                    '--provider' => 'InetStudio\Requests\Forms\Providers\ServiceProvider',
                     '--tag' => 'migrations',
                 ],
             ],

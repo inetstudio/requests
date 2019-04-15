@@ -1,6 +1,6 @@
 let forms = {};
 
-forms.init = function () {
+forms.init = function() {
 
 };
 

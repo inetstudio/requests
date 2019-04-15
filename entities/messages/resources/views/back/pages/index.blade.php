@@ -18,7 +18,9 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <div class="ibox-tools">
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#export_messages_modal">Экспорт</button>
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#export_messages_modal">Экспорт
+                            </button>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -35,5 +37,5 @@
 @include('admin.module.requests.messages::back.partials.modals.export')
 
 @pushonce('scripts:datatables_requests_messages_index')
-    {!! $table->scripts() !!}
+{!! $table->scripts() !!}
 @endpushonce

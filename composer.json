@@ -1,33 +1,35 @@
 {
-    "name": "inetstudio/requests",
-    "description": "Package for requests",
-    "homepage": "https://github.com/inetstudio/requests",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Konstantin Bukin",
-            "email": "bukin@inetstudio.ru"
-        }
-    ],
-    "require": {
-        "inetstudio/widgets": "1.8.*"
-    },
-    "autoload": {
-      "psr-4": {
-        "InetStudio\\Requests\\": "package/src",
-        "InetStudio\\Requests\\Forms\\": "entities/forms/src",
-        "InetStudio\\Requests\\Messages\\": "entities/messages/src"
-      }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "InetStudio\\Requests\\Providers\\RequestsServiceProvider",
-                "InetStudio\\Requests\\Forms\\Providers\\FormsBindingsServiceProvider",
-                "InetStudio\\Requests\\Forms\\Providers\\FormsServiceProvider",
-                "InetStudio\\Requests\\Messages\\Providers\\MessagesBindingsServiceProvider",
-                "InetStudio\\Requests\\Messages\\Providers\\MessagesServiceProvider"
-            ]
-        }
+  "name": "inetstudio/requests",
+  "description": "Package for requests",
+  "homepage": "https://github.com/inetstudio/requests",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Konstantin Bukin",
+      "email": "bukin@inetstudio.ru"
     }
+  ],
+  "require": {
+    "inetstudio/admin-panel": "1.8.*",
+    "inetstudio/subscription": "1.8.*",
+    "inetstudio/widgets": "1.8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "InetStudio\\Requests\\": "package/src",
+      "InetStudio\\Requests\\Forms\\": "entities/forms/src",
+      "InetStudio\\Requests\\Messages\\": "entities/messages/src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "InetStudio\\Requests\\Providers\\ServiceProvider",
+        "InetStudio\\Requests\\Forms\\Providers\\BindingsServiceProvider",
+        "InetStudio\\Requests\\Forms\\Providers\\ServiceProvider",
+        "InetStudio\\Requests\\Messages\\Providers\\BindingsServiceProvider",
+        "InetStudio\\Requests\\Messages\\Providers\\ServiceProvider"
+      ]
+    }
+  }
 }

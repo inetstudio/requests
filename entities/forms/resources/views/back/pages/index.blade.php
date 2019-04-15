@@ -31,5 +31,5 @@
 @endsection
 
 @pushonce('scripts:datatables_requests_forms_index')
-    {!! $table->scripts() !!}
+{!! $table->scripts() !!}
 @endpushonce

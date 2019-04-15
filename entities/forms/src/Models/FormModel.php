@@ -4,7 +4,10 @@ namespace InetStudio\Requests\Forms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\Requests\Forms\Contracts\Models\FormModelContract;
+use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
 /**
  * Class FormModel.
@@ -12,8 +15,16 @@ use InetStudio\Requests\Forms\Contracts\Models\FormModelContract;
 class FormModel extends Model implements FormModelContract
 {
     use SoftDeletes;
+    use BuildQueryScopeTrait;
 
     const ENTITY_TYPE = 'requests_form';
+
+    /**
+     * Should the timestamps be audited?
+     *
+     * @var bool
+     */
+    protected $auditTimestamps = true;
 
     /**
      * Связанная с моделью таблица.
@@ -28,7 +39,9 @@ class FormModel extends Model implements FormModelContract
      * @var array
      */
     protected $fillable = [
-        'title', 'alias', 'messages_limit',
+        'title',
+        'alias',
+        'messages_limit',
     ];
 
     /**
@@ -43,28 +56,42 @@ class FormModel extends Model implements FormModelContract
     ];
 
     /**
-     * Should the timestamps be audited?
-     *
-     * @var bool
+     * Загрузка модели.
      */
-    protected $auditTimestamps = true;
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::$buildQueryScopeDefaults['columns'] = [
+            'id',
+            'title',
+            'alias',
+            'messages_limit',
+        ];
+
+        self::$buildQueryScopeDefaults['relations'] = [
+            'messages' => function (HasMany $messagesQuery) {
+                $messagesQuery->select(['id', 'form_id', 'additional_info']);
+            },
+        ];
+    }
 
     /**
      * Сеттер атрибута title.
      *
      * @param $value
      */
-    public function setTitleAttribute($value)
+    public function setTitleAttribute($value): void
     {
         $this->attributes['title'] = trim(strip_tags($value));
     }
 
     /**
-     * Сеттер атрибута slug.
+     * Сеттер атрибута alias.
      *
      * @param $value
      */
-    public function setAliasAttribute($value)
+    public function setAliasAttribute($value): void
     {
         $this->attributes['alias'] = trim(strip_tags($value));
     }
@@ -74,7 +101,7 @@ class FormModel extends Model implements FormModelContract
      *
      * @param $value
      */
-    public function setMessagesLimitAttribute($value)
+    public function setMessagesLimitAttribute($value): void
     {
         $this->attributes['messages_limit'] = (int) $value;
     }
@@ -84,7 +111,7 @@ class FormModel extends Model implements FormModelContract
      *
      * @return string
      */
-    public function getTypeAttribute()
+    public function getTypeAttribute(): string
     {
         return self::ENTITY_TYPE;
     }
@@ -92,13 +119,18 @@ class FormModel extends Model implements FormModelContract
     /**
      * Отношение "один ко многим" с моделью сообщений.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
+     *
+     * @throws BindingResolutionException
      */
-    public function messages()
+    public function messages(): HasMany
     {
+        $messageModel = app()->make('InetStudio\Requests\Messages\Contracts\Models\MessageModelContract');
+
         return $this->hasMany(
-            app()->make('InetStudio\Requests\Messages\Contracts\Models\MessageModelContract'),
-            'form_id', 'id'
+            get_class($messageModel),
+            'form_id',
+            'id'
         );
     }
 }

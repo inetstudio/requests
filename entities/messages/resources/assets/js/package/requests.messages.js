@@ -1,32 +1,32 @@
 let requestsMessages = {};
 
-requestsMessages.init = function () {
-    $('#export_messages_modal').on('click', '.export', function (event) {
-        let formData = $('#export_messages_modal .choose-data').val();
+requestsMessages.init = function() {
+  $('#export_messages_modal').on('click', '.export', function(event) {
+    let formData = $('#export_messages_modal .choose-data').val();
 
-        if (formData === '') {
-            event.preventDefault();
+    if (formData === '') {
+      event.preventDefault();
 
-            $('#export_messages_modal').modal('hide');
+      $('#export_messages_modal').modal('hide');
 
-            return;
-        }
+      return;
+    }
 
-        let data = JSON.parse(formData),
-            url = route('back.requests.messages.export', {
-                form: data.alias
-            });
+    let data = JSON.parse(formData),
+        url = route('back.requests.messages.export', {
+          form: data.alias,
+        });
 
-        $(this).attr('href', url);
-        $('#export_messages_modal').modal('hide');
-    });
+    $(this).attr('href', url);
+    $('#export_messages_modal').modal('hide');
+  });
 
-    $('#export_messages_modal').on('hidden.bs.modal', function (e) {
-        let modal = $(this);
+  $('#export_messages_modal').on('hidden.bs.modal', function(e) {
+    let modal = $(this);
 
-        modal.find('.choose-data').val('');
-        modal.find('input[name=export_requests_form]').val('');
-    });
+    modal.find('.choose-data').val('');
+    modal.find('input[name=export_requests_form]').val('');
+  });
 };
 
 module.exports = requestsMessages;

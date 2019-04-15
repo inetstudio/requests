@@ -3,8 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateRequestsMessagesTables.
+ */
 class CreateRequestsMessagesTables extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up()
     {
         Schema::create('requests_messages', function (Blueprint $table) {
@@ -18,8 +24,6 @@ class CreateRequestsMessagesTables extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
