@@ -2,10 +2,17 @@
 
 namespace InetStudio\Requests\Messages\Contracts\Models;
 
+use ArrayAccess;
+use JsonSerializable;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Routing\UrlRoutable;
+use Illuminate\Contracts\Queue\QueueableEntity;
+
 /**
  * Interface MessageModelContract.
  */
-interface MessageModelContract
+interface MessageModelContract extends ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
 {
     /**
      * Reload a fresh model instance from the database.

@@ -1,4 +1,4 @@
-@inject('formsService', 'InetStudio\Requests\Forms\Contracts\Services\Back\FormsServiceContract')
+@inject('formsService', 'InetStudio\Requests\Forms\Contracts\Services\Back\ItemsServiceContract')
 
 @extends('admin::back.layouts.app')
 
@@ -64,7 +64,7 @@
                                                 'readonly' => true,
                                             ],
                                             'options' => [
-                                                'values' => [null => ''] + $formsService->getAllForms()->pluck('title', 'id')->toArray(),
+                                                'values' => [null => ''] + $formsService->getAllItems()->pluck('title', 'id')->toArray(),
                                             ],
                                         ]) !!}
 
