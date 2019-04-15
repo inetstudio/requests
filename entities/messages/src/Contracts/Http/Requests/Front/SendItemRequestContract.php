@@ -36,4 +36,23 @@ interface SendItemRequestContract
      * @return array
      */
     public function all($keys = null);
+
+    /**
+     * Determine if the request contains a given input item key.
+     *
+     * @param  string|array  $key
+     * @return bool
+     */
+    public function has($key);
+
+    /**
+     * This method belongs to Symfony HttpFoundation and is not usually needed when using Laravel.
+     *
+     * Instead, you may use the "input" method.
+     *
+     * @param  string  $key
+     * @param  mixed  $default
+     * @return mixed
+     */
+    public function get($key, $default = null);
 }
