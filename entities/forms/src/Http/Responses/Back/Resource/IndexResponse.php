@@ -3,13 +3,12 @@
 namespace InetStudio\Requests\Forms\Http\Responses\Back\Resource;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Requests\Forms\Contracts\Http\Responses\Back\Resource\IndexResponseContract;
 
 /**
  * Class IndexResponse.
  */
-class IndexResponse implements IndexResponseContract, Responsable
+class IndexResponse implements IndexResponseContract
 {
     /**
      * @var array

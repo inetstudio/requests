@@ -3,14 +3,13 @@
 namespace InetStudio\Requests\Messages\Http\Responses\Front;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Requests\Messages\Contracts\Models\MessageModelContract;
 use InetStudio\Requests\Messages\Contracts\Http\Responses\Front\SendItemResponseContract;
 
 /**
  * Class SendItemResponse.
  */
-class SendItemResponse implements SendItemResponseContract, Responsable
+class SendItemResponse implements SendItemResponseContract
 {
     /**
      * @var MessageModelContract|null

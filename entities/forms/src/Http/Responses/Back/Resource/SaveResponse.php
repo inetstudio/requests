@@ -3,14 +3,13 @@
 namespace InetStudio\Requests\Forms\Http\Responses\Back\Resource;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Requests\Forms\Contracts\Models\FormModelContract;
 use InetStudio\Requests\Forms\Contracts\Http\Responses\Back\Resource\SaveResponseContract;
 
 /**
  * Class SaveResponse.
  */
-class SaveResponse implements SaveResponseContract, Responsable
+class SaveResponse implements SaveResponseContract
 {
     /**
      * @var FormModelContract

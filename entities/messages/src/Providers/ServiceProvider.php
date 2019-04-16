@@ -57,7 +57,8 @@ class ServiceProvider extends BaseServiceProvider
                 __DIR__.'/../../database/migrations/create_requests_messages_tables.php.stub' => database_path(
                     'migrations/'.$timestamp.'_create_requests_messages_tables.php'
                 ),
-            ], 'migrations'
+            ],
+            'migrations'
         );
     }
 

@@ -3,14 +3,13 @@
 namespace InetStudio\Requests\Forms\Http\Responses\Back\Resource;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Responsable;
 use InetStudio\Requests\Forms\Contracts\Models\FormModelContract;
 use InetStudio\Requests\Forms\Contracts\Http\Responses\Back\Resource\ShowResponseContract;
 
 /**
  * Class ShowResponse.
  */
-class ShowResponse implements ShowResponseContract, Responsable
+class ShowResponse implements ShowResponseContract
 {
     /**
      * @var FormModelContract
