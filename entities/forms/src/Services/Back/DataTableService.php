@@ -39,7 +39,9 @@ class DataTableService extends DataTable implements DataTableServiceContract
      */
     public function ajax(): JsonResponse
     {
-        $transformer = app()->make('InetStudio\Requests\Forms\Contracts\Transformers\Back\Resource\IndexTransformerContract');
+        $transformer = app()->make(
+            'InetStudio\Requests\Forms\Contracts\Transformers\Back\Resource\IndexTransformerContract'
+        );
 
         return DataTables::of($this->query())
             ->setTransformer($transformer)

@@ -8,9 +8,7 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
       let content = editor.selection.getContent();
       let requestsFormWidgetID = '';
 
-      if (content !== '' &&
-          !/<img class="content-widget".+data-type="requests.form".+\/>/g.test(
-              content)) {
+      if (content !== '' && !/<img class="content-widget".+data-type="requests.form".+\/>/g.test(content)) {
         swal({
           title: 'Ошибка',
           text: 'Необходимо выбрать виджет-форму',
@@ -22,12 +20,15 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
         requestsFormWidgetID = $(content).attr('data-id');
 
         window.Admin.modules.widgets.getWidget(
-            requestsFormWidgetID, function(widget) {
+            requestsFormWidgetID,
+            function(widget) {
               $('#choose_requests_form_modal .choose-data')
                   .val(JSON.stringify(widget.additional_info));
+
               $('#choose_requests_form_modal input[name=requests_form]')
                   .val(widget.additional_info.title);
-            });
+            }
+          );
       }
 
       $('#choose_requests_form_modal .save').off('click');

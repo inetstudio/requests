@@ -2,24 +2,12 @@
 
 namespace InetStudio\Requests\Forms\Contracts\Models;
 
-use ArrayAccess;
-use JsonSerializable;
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Routing\UrlRoutable;
-use Illuminate\Contracts\Queue\QueueableEntity;
+use OwenIt\Auditing\Contracts\Auditable;
+use InetStudio\AdminPanel\Base\Contracts\Models\BaseModelContract;
 
 /**
  * Interface FormModelContract.
  */
-interface FormModelContract extends ArrayAccess, Arrayable, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
+interface FormModelContract extends Auditable, BaseModelContract
 {
-    /**
-     * Reload a fresh model instance from the database.
-     *
-     * @param  array|string  $with
-     *
-     * @return static|null
-     */
-    public function fresh($with = []);
 }

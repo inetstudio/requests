@@ -50,10 +50,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      *
      * @throws BindingResolutionException
      */
-    public function show(
-        ItemsServiceContract $resourceService,
-        int $id = 0
-    ): ShowResponseContract {
+    public function show(ItemsServiceContract $resourceService, int $id = 0): ShowResponseContract
+    {
         $item = $resourceService->getItemById($id);
 
         return $this->app->make(ShowResponseContract::class, compact('item'));
@@ -90,10 +88,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      *
      * @throws BindingResolutionException
      */
-    public function store(
-        ItemsServiceContract $resourceService,
-        SaveItemRequestContract $request
-    ): SaveResponseContract {
+    public function store(ItemsServiceContract $resourceService, SaveItemRequestContract $request): SaveResponseContract
+    {
         return $this->save($resourceService, $request);
     }
 
@@ -107,10 +103,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      *
      * @throws BindingResolutionException
      */
-    public function edit(
-        ItemsServiceContract $resourceService,
-        int $id = 0
-    ): FormResponseContract {
+    public function edit(ItemsServiceContract $resourceService, int $id = 0): FormResponseContract
+    {
         $item = $resourceService->getItemById($id);
 
         return $this->app->make(
@@ -173,10 +167,8 @@ class ResourceController extends Controller implements ResourceControllerContrac
      *
      * @throws BindingResolutionException
      */
-    public function destroy(
-        ItemsServiceContract $resourceService,
-        int $id = 0
-    ): DestroyResponseContract {
+    public function destroy(ItemsServiceContract $resourceService, int $id = 0): DestroyResponseContract
+    {
         $result = $resourceService->destroy($id);
 
         return $this->app->make(

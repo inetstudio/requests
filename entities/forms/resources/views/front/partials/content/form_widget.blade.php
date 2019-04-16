@@ -1,7 +1,7 @@
-@inject('formsService', 'InetStudio\Requests\Forms\Contracts\Services\Front\FormsServiceContract')
+@inject('formsService', 'InetStudio\Requests\Forms\Contracts\Services\Front\ItemsServiceContract')
 
 @php
-    $form = $formsService->getFormByID($id);
+    $form = $formsService->getItemById($id);
 @endphp
 
 @includeWhen(

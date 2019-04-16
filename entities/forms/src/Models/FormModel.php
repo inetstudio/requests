@@ -2,6 +2,7 @@
 
 namespace InetStudio\Requests\Forms\Models;
 
+use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,6 +15,7 @@ use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
  */
 class FormModel extends Model implements FormModelContract
 {
+    use Auditable;
     use SoftDeletes;
     use BuildQueryScopeTrait;
 

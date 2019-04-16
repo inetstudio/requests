@@ -25,7 +25,7 @@ class ExportController extends Controller implements ExportControllerContract
      */
     public function exportItems(string $form): BinaryFileResponse
     {
-        $export = app()->make(
+        $export = $this->app->make(
             ItemsExportContract::class,
             compact('form')
         );
