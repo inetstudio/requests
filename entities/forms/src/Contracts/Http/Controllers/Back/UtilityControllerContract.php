@@ -12,7 +12,7 @@ use InetStudio\Requests\Forms\Contracts\Http\Responses\Back\Utility\SuggestionsR
 interface UtilityControllerContract
 {
     /**
-     * Возвращаем опросы для поля.
+     * Возвращаем формы для поля.
      *
      * @param  UtilityServiceContract  $utilityService
      * @param  Request  $request
