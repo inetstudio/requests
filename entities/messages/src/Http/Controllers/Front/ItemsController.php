@@ -39,7 +39,10 @@ class ItemsController extends Controller implements ItemsControllerContract
         $form = $formsService->getItemById($request->get('form_id', 0));
 
         if ($form && ($form->messages_limit > 0 && $form->messages_limit > $form->messages->count() || $form->messages_limit == 0)) {
-            $data = $request->all();
+            $data = $request->input();
+            $data = ($data) ? (array) $data : [];
+            $data['files'] = $request->allFiles();
+
             $item = $messagesService->save($data, 0);
 
             if ($request->has('subscribe-agree')) {

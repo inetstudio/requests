@@ -43,6 +43,15 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function registerPublishes(): void
     {
+        $this->publishes(
+            [
+                __DIR__.'/../../config/requests_messages.php' => config_path('requests_messages.php'),
+            ],
+            'config'
+        );
+
+        $this->mergeConfigFrom(__DIR__.'/../../config/filesystems.php', 'filesystems.disks');
+
         if (! $this->app->runningInConsole()) {
             return;
         }

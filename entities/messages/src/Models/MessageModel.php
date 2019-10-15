@@ -4,6 +4,7 @@ namespace InetStudio\Requests\Messages\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use InetStudio\Uploads\Models\Traits\HasImages;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use InetStudio\AdminPanel\Models\Traits\HasJSONColumns;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -15,6 +16,7 @@ use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
  */
 class MessageModel extends Model implements MessageModelContract
 {
+    use HasImages;
     use SoftDeletes;
     use HasJSONColumns;
     use BuildQueryScopeTrait;
@@ -27,6 +29,16 @@ class MessageModel extends Model implements MessageModelContract
      * @var string
      */
     protected $table = 'requests_messages';
+
+    /**
+     * Настройки для генерации изображений.
+     *
+     * @var array
+     */
+    protected $images = [
+        'config' => 'requests_messages',
+        'model' => 'requests_message',
+    ];
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.
