@@ -82,7 +82,7 @@ class ItemsExport implements ItemsExportContract, FromQuery, WithMapping, WithHe
         return $this->model->buildQuery(
                 [
                     'columns' => ['created_at'],
-                    'relations' => ['form'],
+                    'relations' => ['form', 'media'],
                 ]
             )->whereHas(
                 'form',
@@ -116,6 +116,10 @@ class ItemsExport implements ItemsExportContract, FromQuery, WithMapping, WithHe
             }
 
             $data[] = $value;
+        }
+
+        foreach ($item->media as $mediaItem) {
+            $data[] = $mediaItem->getFullUrl();
         }
 
         return $data;

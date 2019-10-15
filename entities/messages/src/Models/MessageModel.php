@@ -87,6 +87,20 @@ class MessageModel extends Model implements MessageModelContract
             'form' => function (HasOne $formQuery) {
                 $formQuery->select(['id', 'title', 'alias', 'messages_limit']);
             },
+
+            'media' => function ($query) {
+                $query->select([
+                    'id',
+                    'model_id',
+                    'model_type',
+                    'collection_name',
+                    'file_name',
+                    'disk',
+                    'mime_type',
+                    'custom_properties',
+                    'responsive_images'
+                ]);
+            },
         ];
     }
 
