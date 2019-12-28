@@ -23,7 +23,7 @@
                         ],
                         'field' => [
                             'class' => 'form-control autocomplete',
-                            'data-search' => route('back.requests.forms.getSuggestions'),
+                            'data-search' => route('back.requests.forms.utility.suggestions'),
                             'data-target' => '#export_requests_form_data'
                         ],
                     ]) !!}

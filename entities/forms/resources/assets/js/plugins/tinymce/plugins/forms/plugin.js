@@ -1,4 +1,34 @@
 window.tinymce.PluginManager.add('requests.forms', function(editor) {
+  let widgetData = {
+    widget: {
+      events: {
+        widgetSaved: function(model) {
+          editor.execCommand(
+              'mceReplaceContent',
+              false,
+              '<img class="content-widget" data-type="requests.form" data-id="' + model.id + '" alt="Виджет-форма: '+model.additional_info.title+'" />',
+          );
+        },
+      },
+    },
+  };
+
+  function initFormsComponents() {
+    if (typeof window.Admin.vue.modulesComponents.$refs['requests-forms_FormWidget'] == 'undefined') {
+      window.Admin.vue.modulesComponents.modules['requests-forms'].components = _.union(
+          window.Admin.vue.modulesComponents.modules['requests-forms'].components, [
+            {
+              name: 'FormWidget',
+              data: widgetData,
+            },
+          ]);
+    } else {
+      let component = window.Admin.vue.modulesComponents.$refs['requests-forms_FormWidget'][0];
+
+      component.$data.model.id = widgetData.model.id;
+    }
+  }
+  
   editor.addButton('add_request_form_widget', {
     title: 'Заявки',
     icon: 'editimage',
@@ -6,9 +36,19 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
       editor.focus();
 
       let content = editor.selection.getContent();
-      let requestsFormWidgetID = '';
+      let isForm = /<img class="content-widget".+data-type="requests.form".+>/g.test(content);
 
-      if (content !== '' && !/<img class="content-widget".+data-type="requests.form".+\/>/g.test(content)) {
+      if (content === '' || isForm) {
+        widgetData.model = {
+          id: parseInt($(content).attr('data-id')) || 0,
+        };
+
+        initFormsComponents();
+
+        window.waitForElement('#add_requests_form_widget_modal', function() {
+          $('#add_requests_form_widget_modal').modal();
+        });
+      } else {
         swal({
           title: 'Ошибка',
           text: 'Необходимо выбрать виджет-форму',
@@ -16,44 +56,7 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
         });
 
         return false;
-      } else if (content !== '') {
-        requestsFormWidgetID = $(content).attr('data-id');
-
-        window.Admin.modules.widgets.getWidget(
-            requestsFormWidgetID,
-            function(widget) {
-              $('#choose_requests_form_modal .choose-data')
-                  .val(JSON.stringify(widget.additional_info));
-
-              $('#choose_requests_form_modal input[name=requests_form]')
-                  .val(widget.additional_info.title);
-            }
-          );
       }
-
-      $('#choose_requests_form_modal .save').off('click');
-      $('#choose_requests_form_modal .save').on('click', function(event) {
-        event.preventDefault();
-
-        let data = JSON.parse(
-            $('#choose_requests_form_modal .choose-data').val());
-
-        window.Admin.modules.widgets.saveWidget(requestsFormWidgetID, {
-          view: 'admin.module.requests.forms::front.partials.content.form_widget',
-          params: {
-            id: data.id,
-          },
-          additional_info: data,
-        }, {
-          editor: editor,
-          type: 'requests.form',
-          alt: 'Виджет-форма: ' + data.title,
-        }, function(widget) {
-          $('#choose_requests_form_modal').modal('hide');
-        });
-      });
-
-      $('#choose_requests_form_modal').modal();
-    },
+    }
   });
 });

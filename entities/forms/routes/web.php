@@ -13,7 +13,7 @@ Route::group(
             ->name('back.requests.forms.data.index');
 
         Route::post('forms/suggestions', 'UtilityControllerContract@getSuggestions')
-            ->name('back.requests.forms.getSuggestions');
+            ->name('back.requests.forms.utility.suggestions');
 
         Route::resource('forms', 'ResourceControllerContract', ['as' => 'back.requests']);
     }
