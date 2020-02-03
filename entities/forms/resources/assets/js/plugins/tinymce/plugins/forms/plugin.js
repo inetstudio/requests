@@ -22,13 +22,15 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
               data: widgetData,
             },
           ]);
-    } else {
-      let component = window.Admin.vue.modulesComponents.$refs['requests-forms_FormWidget'][0];
-
-      component.$data.model.id = widgetData.model.id;
     }
   }
-  
+
+  function loadWidget() {
+    let component = window.Admin.vue.modulesComponents.$refs['requests-forms_FormWidget'][0];
+
+    component.$data.model.id = widgetData.model.id;
+  }
+
   editor.addButton('add_request_form_widget', {
     title: 'Заявки',
     icon: 'editimage',
@@ -46,6 +48,8 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
         initFormsComponents();
 
         window.waitForElement('#add_requests_form_widget_modal', function() {
+          loadWidget();
+
           $('#add_requests_form_widget_modal').modal();
         });
       } else {
