@@ -13,20 +13,8 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
     },
   };
 
-  function initFormsComponents() {
-    if (typeof window.Admin.vue.modulesComponents.$refs['requests-forms_FormWidget'] == 'undefined') {
-      window.Admin.vue.modulesComponents.modules['requests-forms'].components = _.union(
-          window.Admin.vue.modulesComponents.modules['requests-forms'].components, [
-            {
-              name: 'FormWidget',
-              data: widgetData,
-            },
-          ]);
-    }
-  }
-
   function loadWidget() {
-    let component = window.Admin.vue.modulesComponents.$refs['requests-forms_FormWidget'][0];
+    let component = window.Admin.vue.helpers.getVueComponent('requests-forms', 'FormWidget');
 
     component.$data.model.id = widgetData.model.id;
   }
@@ -45,7 +33,7 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
           id: parseInt($(content).attr('data-id')) || 0,
         };
 
-        initFormsComponents();
+        window.Admin.vue.helpers.initComponent('requests-forms', 'FormWidget', widgetData);
 
         window.waitForElement('#add_requests_form_widget_modal', function() {
           loadWidget();

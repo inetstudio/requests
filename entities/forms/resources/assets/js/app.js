@@ -1,6 +1,6 @@
 require('./plugins/tinymce/plugins/forms');
 
-require('../../../../../../widgets/resources/assets/js/mixins/widget');
+require('../../../../../../widgets/entities/widgets/resources/assets/js/mixins/widget');
 
 require('./stores/requests-forms');
 
