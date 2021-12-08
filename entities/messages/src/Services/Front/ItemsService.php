@@ -40,8 +40,13 @@ class ItemsService extends BaseService implements ItemsServiceContract
 
         $files = $data['files'];
 
-        app()->make('InetStudio\Uploads\Contracts\Services\Front\ItemsServiceContract')
-            ->attachFilesToObject($item, $files, 'requests_messages');
+        resolve(
+            'InetStudio\UploadsPackage\Uploads\Contracts\Actions\AttachMediaToObjectActionContract',
+            [
+                'item' => $item,
+                'media' => Arr::get($data, 'media', []),
+            ]
+        )->execute();
 
         event(
             app()->make(
