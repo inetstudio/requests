@@ -1,6 +1,5 @@
-let forms = {};
+export let requestsForms = {
+  init: () => {
 
-forms.init = function() {
+  }
 };
-
-module.exports = forms;

@@ -1,4 +1,7 @@
-window.Admin.vue.stores['requests-forms'] = new Vuex.Store({
+import hash from 'object-hash';
+import { v4 as uuidv4 } from 'uuid';
+
+window.Admin.vue.stores['requests-forms'] = new window.Vuex.Store({
   state: {
     emptyForm: {
       model: {
@@ -18,10 +21,10 @@ window.Admin.vue.stores['requests-forms'] = new Vuex.Store({
   mutations: {
     setForm(state, form) {
       let emptyForm = JSON.parse(JSON.stringify(state.emptyForm));
-      emptyForm.model.id = UUID.generate();
+      emptyForm.model.id = uuidv4();
 
       let resultForm = _.merge(emptyForm, form);
-      resultForm.hash = window.hash(resultForm.model);
+      resultForm.hash = hash(resultForm.model);
 
       state.form = resultForm;
     },

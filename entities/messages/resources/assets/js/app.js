@@ -1,2 +1,3 @@
-let requestsMessages = require('./package/requests.messages');
+import {requestsMessages} from './package/requests.messages';
+
 requestsMessages.init();

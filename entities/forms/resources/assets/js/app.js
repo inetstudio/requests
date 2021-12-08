@@ -1,13 +1,14 @@
+import {requestsForms} from './package/forms';
+
 require('./plugins/tinymce/plugins/forms');
 
 require('../../../../../../widgets/entities/widgets/resources/assets/js/mixins/widget');
 
 require('./stores/requests-forms');
 
-Vue.component(
+window.Vue.component(
     'FormWidget',
-    require('./components/partials/FormWidget/FormWidget.vue').default,
+    () => import('./components/partials/FormWidget/FormWidget.vue'),
 );
 
-let requestsForms = require('./package/forms');
 requestsForms.init();

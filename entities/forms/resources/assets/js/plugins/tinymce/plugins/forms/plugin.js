@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 window.tinymce.PluginManager.add('requests.forms', function(editor) {
   let widgetData = {
     widget: {
@@ -41,10 +43,10 @@ window.tinymce.PluginManager.add('requests.forms', function(editor) {
           $('#add_requests_form_widget_modal').modal();
         });
       } else {
-        swal({
+        Swal.fire({
           title: 'Ошибка',
           text: 'Необходимо выбрать виджет-форму',
-          type: 'error',
+          icon: 'error',
         });
 
         return false;
